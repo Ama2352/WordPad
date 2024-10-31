@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnCut = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
@@ -52,10 +53,18 @@
             this.btnReplace = new System.Windows.Forms.Button();
             this.lblSearch = new System.Windows.Forms.Label();
             this.lblReplace = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.strikethroughButton = new System.Windows.Forms.Button();
+            this.subscriptButton = new System.Windows.Forms.Button();
+            this.superscriptButton = new System.Windows.Forms.Button();
+            this.highlightButton = new System.Windows.Forms.Button();
+            this.growFontButton = new System.Windows.Forms.Button();
+            this.shrinkFontButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(187, 91);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(431, 239);
@@ -282,11 +291,82 @@
             this.lblReplace.TabIndex = 23;
             this.lblReplace.Text = "Replace";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // strikethroughButton
+            // 
+            this.strikethroughButton.Location = new System.Drawing.Point(12, 12);
+            this.strikethroughButton.Name = "strikethroughButton";
+            this.strikethroughButton.Size = new System.Drawing.Size(84, 23);
+            this.strikethroughButton.TabIndex = 24;
+            this.strikethroughButton.Text = "Strikethrough";
+            this.strikethroughButton.UseVisualStyleBackColor = true;
+            this.strikethroughButton.Click += new System.EventHandler(this.strikethroughButton_Click);
+            // 
+            // subscriptButton
+            // 
+            this.subscriptButton.Location = new System.Drawing.Point(102, 12);
+            this.subscriptButton.Name = "subscriptButton";
+            this.subscriptButton.Size = new System.Drawing.Size(75, 23);
+            this.subscriptButton.TabIndex = 25;
+            this.subscriptButton.Text = "Subscript";
+            this.subscriptButton.UseVisualStyleBackColor = true;
+            this.subscriptButton.Click += new System.EventHandler(this.subscriptButton_Click);
+            // 
+            // superscriptButton
+            // 
+            this.superscriptButton.Location = new System.Drawing.Point(187, 12);
+            this.superscriptButton.Name = "superscriptButton";
+            this.superscriptButton.Size = new System.Drawing.Size(75, 23);
+            this.superscriptButton.TabIndex = 26;
+            this.superscriptButton.Text = "Superscript";
+            this.superscriptButton.UseVisualStyleBackColor = true;
+            this.superscriptButton.Click += new System.EventHandler(this.superscriptButton_Click);
+            // 
+            // highlightButton
+            // 
+            this.highlightButton.Location = new System.Drawing.Point(268, 13);
+            this.highlightButton.Name = "highlightButton";
+            this.highlightButton.Size = new System.Drawing.Size(75, 23);
+            this.highlightButton.TabIndex = 27;
+            this.highlightButton.Text = "Hightlight";
+            this.highlightButton.UseVisualStyleBackColor = true;
+            this.highlightButton.Click += new System.EventHandler(this.highlightButton_Click);
+            // 
+            // growFontButton
+            // 
+            this.growFontButton.Location = new System.Drawing.Point(349, 13);
+            this.growFontButton.Name = "growFontButton";
+            this.growFontButton.Size = new System.Drawing.Size(75, 23);
+            this.growFontButton.TabIndex = 28;
+            this.growFontButton.Text = "GrowFont";
+            this.growFontButton.UseVisualStyleBackColor = true;
+            this.growFontButton.Click += new System.EventHandler(this.growFontButton_Click);
+            // 
+            // shrinkFontButton
+            // 
+            this.shrinkFontButton.Location = new System.Drawing.Point(430, 13);
+            this.shrinkFontButton.Name = "shrinkFontButton";
+            this.shrinkFontButton.Size = new System.Drawing.Size(75, 23);
+            this.shrinkFontButton.TabIndex = 29;
+            this.shrinkFontButton.Text = "ShrinkFont";
+            this.shrinkFontButton.UseVisualStyleBackColor = true;
+            this.shrinkFontButton.Click += new System.EventHandler(this.shrinkFontButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.shrinkFontButton);
+            this.Controls.Add(this.growFontButton);
+            this.Controls.Add(this.highlightButton);
+            this.Controls.Add(this.superscriptButton);
+            this.Controls.Add(this.subscriptButton);
+            this.Controls.Add(this.strikethroughButton);
             this.Controls.Add(this.lblReplace);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.btnReplace);
@@ -345,6 +425,13 @@
         private System.Windows.Forms.Button btnReplace;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Label lblReplace;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button strikethroughButton;
+        private System.Windows.Forms.Button subscriptButton;
+        private System.Windows.Forms.Button superscriptButton;
+        private System.Windows.Forms.Button highlightButton;
+        private System.Windows.Forms.Button growFontButton;
+        private System.Windows.Forms.Button shrinkFontButton;
     }
 }
 
