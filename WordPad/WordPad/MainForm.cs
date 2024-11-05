@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static WordPad.ParagraphManager;
 
 namespace WordPad
 {
@@ -51,6 +52,15 @@ namespace WordPad
             _fontManager.FontSizeChanged += OnFontSizeChanged;
         }
 
+        // Hàm để thiết lập ComboBox Bullet Styles
+        private void SetupBulletStyleComboBox()
+        {
+            // Thêm các kiểu đầu dòng vào ComboBox
+            toolStripCombBulletStyles.Items.AddRange(Enum.GetNames(typeof(BulletStyle)));
+
+            // Gắn sự kiện SelectedIndexChanged cho ComboBox
+            toolStripCombBulletStyles.SelectedIndexChanged += toolStripCombBulletStyles_SelectedIndexChanged;
+        }
 
         public MainForm()
         {
@@ -65,7 +75,38 @@ namespace WordPad
             SettingFontType(_fontManager);
             SettingFontSize(_fontManager);
 
-            
+            this.KeyPreview = true; // Đặt KeyPreview thành true
+            this.KeyDown += new KeyEventHandler(MainForm_KeyDown); // Đăng ký sự kiện KeyDown
+
+            // Gọi hàm thiết lập ComboBox cho Bullet Styles
+            SetupBulletStyleComboBox();
+        }
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Kiểm tra tổ hợp phím Ctrl + C
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                _clipboardManager.Copy(); // Gọi phương thức Copy
+                e.SuppressKeyPress = true; // Ngăn chặn âm thanh của phím
+            }
+            // Kiểm tra tổ hợp phím Ctrl + V
+            else if (e.Control && e.KeyCode == Keys.V)
+            {
+                _clipboardManager.Paste(); // Gọi phương thức Paste
+                e.SuppressKeyPress = true;
+            }
+            // Kiểm tra tổ hợp phím Ctrl + X
+            else if (e.Control && e.KeyCode == Keys.X)
+            {
+                _clipboardManager.Cut(); // Gọi phương thức Cut
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void btnPasteSpecial_Click(object sender, EventArgs e) // Ví dụ: Button để mở Paste Special
+        {
+            PasteSpecialForm pasteSpecialForm = new PasteSpecialForm(_clipboardManager);
+            pasteSpecialForm.ShowDialog(); // Hiển thị hộp thoại như một modal dialog
         }
 
         // Clipboard
@@ -184,16 +225,20 @@ namespace WordPad
             _paragraphManager.AlignRight();
         }
 
-        private void btnIncreaseLineSpacing_Click(object sender, EventArgs e)
+        private void btnIncreaseIndent_Click(object sender, EventArgs e)
         {
-            _paragraphManager.IncreaseLineSpacing();
+            _paragraphManager.IncreaseIndent();
         }
 
-        private void btnDecreaseLineSpacing_Click(object sender, EventArgs e)
+        private void btnDecreaseIndent_Click(object sender, EventArgs e)
         {
-            _paragraphManager.DecreaseLineSpacing();
+            _paragraphManager.DecreaseIndent();
         }
 
+        private void toolStripCombBulletStyles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
 
         // Insert
         private void btnInsertImage_Click(object sender, EventArgs e)
@@ -204,6 +249,64 @@ namespace WordPad
         private void btnInsertDateTime_Click(object sender, EventArgs e)
         {
             _insertManager.InsertDateTime();
+        }
+
+        private void insertPictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _insertManager.InsertImage();
+        }
+
+        private void resizePictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra nếu có hình ảnh được chọn
+            if (richTextBox1.SelectionStart < richTextBox1.TextLength)
+            {
+                // Lấy vị trí bắt đầu của lựa chọn
+                int selectionStart = richTextBox1.SelectionStart;
+
+                // Tìm ID của hình ảnh tương ứng với vị trí đã chọn
+                Guid? imageId = null;
+                foreach (var position in _insertManager.imagePositions.Keys.OrderBy(pos => pos))
+                {
+                    if (position == selectionStart)
+                    {
+                        imageId = _insertManager.imagePositions[position];
+                        break;
+                    }
+                }
+
+                if(imageId.HasValue)
+                {
+                    // Truyền kích thước gốc vào ResizeForm
+                    using (ResizeForm resizeForm = new ResizeForm(_insertManager.OriginalImageSize.Width, _insertManager.OriginalImageSize.Height))
+                    {
+                        if (resizeForm.ShowDialog() == DialogResult.OK)
+                        {
+                            int newWidth = resizeForm.NewWidth;
+                            int newHeight = resizeForm.NewHeight;
+
+                            MessageBox.Show($"Image: {_insertManager.OriginalImageSize.Width} width {_insertManager.OriginalImageSize.Height} height");
+
+                            _insertManager.ResizeImage(newWidth, newHeight, imageId.Value);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No image found at the selected position.", "Resize Image", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an image to resize.", "Resize Image", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void changePictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Gọi phương thức thay đổi hình ảnh từ InsertManager
+            _insertManager = new InsertManager(richTextBox1);
+            _insertManager.ChangeImage();
         }
 
 
@@ -230,5 +333,17 @@ namespace WordPad
         {
             _editingManager.SelectAllText();
         }
+
+        private void toolStripDropDownButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripDropDownButtonPicture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

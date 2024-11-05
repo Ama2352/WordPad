@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -36,45 +37,26 @@ namespace WordPad
             _richTextBox.SelectionAlignment = HorizontalAlignment.Center;
         }
 
-        // Tăng khoảng cách dòng
-        public void IncreaseLineSpacing()
+        // Tăng thụt lề
+        public void IncreaseIndent()
         {
-            SetLineSpacing(20);
+            _richTextBox.SelectionIndent += 20; // Tăng thụt lề 20 pixels
         }
 
-        // Giảm khoảng cách dòng
-        public void DecreaseLineSpacing()
+        // Giảm thụt lề
+        public void DecreaseIndent()
         {
-            SetLineSpacing(-20);
+            _richTextBox.SelectionIndent = Math.Max(0, _richTextBox.SelectionIndent - 20); // Giảm thụt lề 20 pixels nhưng không cho phép giá trị âm
         }
 
-        // Đặt khoảng cách dòng
-        private void SetLineSpacing(int adjustment)
+        public enum BulletStyle
         {
-            var selection = _richTextBox.SelectionLength > 0 ? _richTextBox.SelectedRtf : _richTextBox.Rtf;
-
-            selection = Regex.Replace(selection, @"\\sl(\d+)", match =>
-            {
-                try
-                {
-                    int currentSpacing = int.Parse(match.Groups[1].Value);
-                    int newSpacing = Math.Max(0, currentSpacing + adjustment);
-                    return $@"\sl{newSpacing}";
-                }
-                catch (FormatException)
-                {
-                    // Xử lý lỗi khi parse
-                    return match.Value; // Giữ nguyên giá trị cũ nếu lỗi
-                }
-            });
-
-            if (!Regex.IsMatch(selection, @"\\sl\d+"))
-            {
-                // Nếu không tìm thấy \sl, thêm mới 
-                selection = selection.Replace(@"{\rtf1", $@"{{\rtf1\sl{Math.Max(0, 240 + adjustment)}");
-            }
-
-            _richTextBox.Rtf = selection;
+            None,             // Không có bullet
+            Bullet,           // Dấu chấm
+            Numbered,         // Số thứ tự
+            Lettered,         // Chữ cái
+            RomanNumerals     // Số La Mã
         }
+
     }
 }
