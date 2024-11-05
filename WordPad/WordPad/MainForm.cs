@@ -278,7 +278,11 @@ namespace WordPad
                 if(imageId.HasValue)
                 {
                     // Truyền kích thước gốc vào ResizeForm
-                    using (ResizeForm resizeForm = new ResizeForm(_insertManager.OriginalImageSize.Width, _insertManager.OriginalImageSize.Height))
+                    using (ResizeForm resizeForm =
+                        new ResizeForm(
+                            _insertManager.OriginalImageSize.Width,
+                            _insertManager.OriginalImageSize.Height,
+                            imageId.Value))
                     {
                         if (resizeForm.ShowDialog() == DialogResult.OK)
                         {
@@ -307,6 +311,18 @@ namespace WordPad
             // Gọi phương thức thay đổi hình ảnh từ InsertManager
             _insertManager = new InsertManager(richTextBox1);
             _insertManager.ChangeImage();
+        }
+
+        private void toolStripDropDownButtonDateAndTime_Click(object sender, EventArgs e)
+        {
+            using (DateAndTimeForm dateAndTimeForm = new DateAndTimeForm(_insertManager))
+            {
+                if(dateAndTimeForm.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBox1.Select(richTextBox1.SelectionStart, richTextBox1.SelectionLength);
+                    richTextBox1.SelectedText = dateAndTimeForm.chosenDateTime;
+                }    
+            }    
         }
 
 
@@ -344,6 +360,5 @@ namespace WordPad
 
         }
 
-        
     }
 }

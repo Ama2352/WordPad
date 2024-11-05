@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClipboardManager.cs" />
+    <Compile Include="DateAndTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateAndTimeForm.Designer.cs">
+      <DependentUpon>DateAndTimeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditingManager.cs" />
     <Compile Include="FontManager.cs" />
     <Compile Include="InsertManager.cs" />
@@ -120,6 +126,9 @@
     <Compile Include="ResizeForm.Designer.cs">
       <DependentUpon>ResizeForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DateAndTimeForm.resx">
+      <DependentUpon>DateAndTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

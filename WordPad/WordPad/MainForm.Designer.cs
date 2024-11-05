@@ -68,6 +68,7 @@
             this.insertPictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resizePictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButtonDateAndTime = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -378,10 +379,10 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.toolStrip1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(225, 88);
-            this.toolStripContainer1.Location = new System.Drawing.Point(568, 12);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(266, 63);
+            this.toolStripContainer1.Location = new System.Drawing.Point(521, 3);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(225, 88);
+            this.toolStripContainer1.Size = new System.Drawing.Size(266, 88);
             this.toolStripContainer1.TabIndex = 33;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -390,10 +391,11 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton1,
-            this.toolStripDropDownButtonPicture});
+            this.toolStripDropDownButtonPicture,
+            this.toolStripDropDownButtonDateAndTime});
             this.toolStrip1.Location = new System.Drawing.Point(9, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(143, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(259, 38);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -431,23 +433,33 @@
             // insertPictureToolStripMenuItem
             // 
             this.insertPictureToolStripMenuItem.Name = "insertPictureToolStripMenuItem";
-            this.insertPictureToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.insertPictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.insertPictureToolStripMenuItem.Text = "Insert Picture";
             this.insertPictureToolStripMenuItem.Click += new System.EventHandler(this.insertPictureToolStripMenuItem_Click);
             // 
             // changePictureToolStripMenuItem
             // 
             this.changePictureToolStripMenuItem.Name = "changePictureToolStripMenuItem";
-            this.changePictureToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.changePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.changePictureToolStripMenuItem.Text = "Change Picture";
             this.changePictureToolStripMenuItem.Click += new System.EventHandler(this.changePictureToolStripMenuItem_Click);
             // 
             // resizePictureToolStripMenuItem
             // 
             this.resizePictureToolStripMenuItem.Name = "resizePictureToolStripMenuItem";
-            this.resizePictureToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.resizePictureToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resizePictureToolStripMenuItem.Text = "Resize Picture";
             this.resizePictureToolStripMenuItem.Click += new System.EventHandler(this.resizePictureToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButtonDateAndTime
+            // 
+            this.toolStripDropDownButtonDateAndTime.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonDateAndTime.Image")));
+            this.toolStripDropDownButtonDateAndTime.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonDateAndTime.Name = "toolStripDropDownButtonDateAndTime";
+            this.toolStripDropDownButtonDateAndTime.Size = new System.Drawing.Size(85, 35);
+            this.toolStripDropDownButtonDateAndTime.Text = "Date and time";
+            this.toolStripDropDownButtonDateAndTime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripDropDownButtonDateAndTime.Click += new System.EventHandler(this.toolStripDropDownButtonDateAndTime_Click);
             // 
             // MainForm
             // 
@@ -541,6 +553,7 @@
         private System.Windows.Forms.ToolStripMenuItem insertPictureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePictureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resizePictureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripDropDownButtonDateAndTime;
     }
 }
 

@@ -4,13 +4,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using Image = System.Drawing.Image;
+using ListBox = System.Windows.Forms.ListBox;
 
 namespace WordPad
 {
-    internal class InsertManager
+    public class InsertManager
     {
         private RichTextBox _richTextBox;
+
         public Size OriginalImageSize { get; private set; }
 
         // Kho lưu trữ ảnh gốc với ID duy nhất
@@ -71,7 +75,7 @@ namespace WordPad
         public void ChangeImage()
         {
             // Tìm kiếm hình ảnh trong RichTextBox (giả sử chỉ có một hình ảnh)
-            if (_richTextBox.SelectionStart == _richTextBox.SelectionLength)
+            if (_richTextBox.SelectionLength <= 0)
             {
                 MessageBox.Show("Please select an image to change.", "Change Image", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -142,6 +146,31 @@ namespace WordPad
         {
             string dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
             _richTextBox.AppendText(dateTime);
+        }
+
+        public void DisplayDateTimeFormats(ListBox _listBox)
+        {
+            DateTime now = DateTime.Now;
+
+            // Xóa nội dung hiện tại của _listBox
+            _listBox.Items.Clear();
+
+            // Thêm các loại định dạng
+            _listBox.Items.Add(now.ToString("MM/d/yyyy"));           // 11/5/2024
+            _listBox.Items.Add(now.ToString("MM/d/yy"));            // 11/5/24
+            _listBox.Items.Add(now.ToString("M/dd/yy"));              // 11/05/24
+            _listBox.Items.Add(now.ToString("MM/dd/yyyy"));           // 11/05/2024
+            _listBox.Items.Add(now.ToString("yy/MM/dd"));            // 24/11/05
+            _listBox.Items.Add(now.ToString("yyyy-MM-dd"));           // 2024-11-05
+            _listBox.Items.Add(now.ToString("dd-MMM-yy"));           // 05-Nov-24
+            _listBox.Items.Add(now.ToString("dddd, MMMM dd, yyyy"));   // Tuesday, November 5, 2024
+            _listBox.Items.Add(now.ToString("MMMM dd, yyyy"));        // November 5, 2024
+            _listBox.Items.Add(now.ToString("dddd, d MMMM, yyyy"));   // Tuesday, 5 November, 2024
+            _listBox.Items.Add(now.ToString("d MMMM, yyyy"));         // 5 November, 2024
+            _listBox.Items.Add(now.ToString("h:mm:ss tt"));          // 3:08:27 PM
+            _listBox.Items.Add(now.ToString("hh:mm:ss tt"));            // 03:08:27 PM 
+            _listBox.Items.Add(now.ToString("HH:mm:ss"));            // 15:08:27 
+
         }
     }
 }

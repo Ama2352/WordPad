@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace WordPad
@@ -23,8 +24,11 @@ namespace WordPad
 
         private bool _isUpdating = false; // Biến để ngăn vòng lặp
 
-        private static decimal resizedNumericHorizontal;
-        private static decimal resizedNumericVertical;
+        // Kho lưu trữ ảnh gốc với ID duy nhất
+        public static Dictionary<Guid, KeyValuePair<decimal,decimal>> resizedImageInfo { get; private set; } 
+            = new Dictionary<Guid,KeyValuePair<decimal,decimal>>();
+
+        private Guid checkImageID; 
 
         private void ResizeForm_Load(object sender, EventArgs e)
         {
@@ -35,22 +39,28 @@ namespace WordPad
             }
         }
 
-        public ResizeForm(int originalWidth, int originalHeight)
+        public ResizeForm(int originalWidth, int originalHeight, Guid imageID)
         {
             InitializeComponent();
             _originalWidth = originalWidth;
             _originalHeight = originalHeight;
 
-            if(isFirstLoad) 
+            checkImageID = imageID; // Lưu lại ID của bức ảnh được chọn để chỉnh sửa
+
+
+            // Nếu bức ảnh được chọn là bức ảnh đã được chỉnh sửa
+            if (resizedImageInfo.ContainsKey(imageID)) 
+            {
+                // Gán đúng giá trị được điều chỉnh tương ứng với bức ảnh được chỉnh sửa
+                numericUpDownHorizontal.Value = resizedImageInfo[imageID].Key;
+                numericUpDownVertical.Value = resizedImageInfo[imageID].Value;
+            }
+            // Nếu bức ảnh được chọn là bức ảnh chưa được chỉnh sửa
+            else
             {
                 numericUpDownHorizontal.Value = 100; // 100% cho kích thước gốc
                 numericUpDownVertical.Value = 100; // 100% cho kích thước gốc
             }
-            else
-            {
-                numericUpDownHorizontal.Value = resizedNumericHorizontal;
-                numericUpDownVertical.Value = resizedNumericVertical;
-            }    
 
             chkLockAspectRatio.Checked = true;
 
@@ -63,8 +73,9 @@ namespace WordPad
             // Gọi lại hàm ValueChanged để đảm bảo NewWidth và NewHeight được cập nhật
             NumericUpDown_ValueChanged(null, null);
 
-            resizedNumericHorizontal = numericUpDownHorizontal.Value;
-            resizedNumericVertical = numericUpDownVertical.Value;
+            // Cập nhật giá trị được chỉnh sửa tương ứng với bức ảnh 
+            resizedImageInfo[checkImageID] =
+                    new KeyValuePair<decimal, decimal>(numericUpDownHorizontal.Value, numericUpDownVertical.Value);
 
             this.DialogResult = DialogResult.OK; // Trả về kết quả OK
             this.Close(); // Đóng form
