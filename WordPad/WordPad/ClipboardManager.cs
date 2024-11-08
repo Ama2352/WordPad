@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -12,8 +13,11 @@ namespace WordPad
     public class ClipboardManager
     {
         private RichTextBox _richTextBox;
-        private string _imageDirectory;
+        public string _imageDirectory { get; private set; } 
         public bool IsCopiedFromApplication { get; private set; } // Thuộc tính theo dõi nguồn
+
+        public string linkText { get; private set; }
+        public string typeOfLink {  get; private set; }
 
         // Khởi tạo với tham chiếu tới RichTextBox
         public ClipboardManager(RichTextBox richTextBox)
@@ -139,16 +143,173 @@ namespace WordPad
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
                     return ("Inserts the contents of the clipboard into your document so that you may activate it using WordPad.",
                             LoadImage(imagePath));
+                case "Foxit PhantomPDF Document":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Foxit PhantomPDF Document", LoadImage(imagePath));
+
+                case "Microsoft Word 97-2003 Document":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Word 97-2003 Document", LoadImage(imagePath));
+
+                case "Microsoft Word Document":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Word Document", LoadImage(imagePath));
+
+                case "Microsoft Word Macro-Enabled Document":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Word Macro-Enabled Document", LoadImage(imagePath));
+
+                case "nFoxit PhantomPDF Document":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho nFoxit PhantomPDF Document", LoadImage(imagePath));
+
+                case "OpenDocument Presentation":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho OpenDocument Presentation", LoadImage(imagePath));
+
+                case "OpenDocument Spreadsheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho OpenDocument Spreadsheet", LoadImage(imagePath));
+
+                case "OpenDocument Text":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho OpenDocument Text", LoadImage(imagePath));
+
+                case "Microsoft Excel 97-2003 Worksheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Excel 97-2003 Worksheet", LoadImage(imagePath));
+
+                case "Microsoft Excel Binary Worksheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Excel Binary Worksheet", LoadImage(imagePath));
+
+                case "Microsoft Excel Chart":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Excel Chart", LoadImage(imagePath));
+
+                case "Microsoft Worksheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Worksheet", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint 97-2003 Presentation":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint 97-2003 Presentation", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint 97-2003 Slide":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint 97-2003 Slide", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint Macro-Enabled Presentation":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint Macro-Enabled Presentation", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint Macro-Enabled Slide":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint Macro-Enabled Slide", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint Presentation":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint Presentation", LoadImage(imagePath));
+
+                case "Microsoft PowerPoint Slide":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft PowerPoint Slide", LoadImage(imagePath));
+
+                case "Math Type 7.0 Equation":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Math Type 7.0 Equation", LoadImage(imagePath));
+
+                case "Microsoft Graph Chart":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Microsoft Graph Chart", LoadImage(imagePath));
+
+                case "Organization Chart Add-in for Microsoft":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Organization Chart Add-in for Microsoft", LoadImage(imagePath));
+
+                case "Package":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Package", LoadImage(imagePath));
+
+                case "Paintbrush Picture":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Mô tả cho Paintbrush Picture", LoadImage(imagePath));
 
                 default:
-                    return ("No descripion for this part.", null);
+                    return ("No description for this option.", null);
             }
         }
 
         // Phương thức tải ảnh từ đường dẫn, kiểm tra nếu ảnh tồn tại
-        private Image LoadImage(string path)
+        public Image LoadImage(string path)
         {
             return File.Exists(path) ? Image.FromFile(path) : null;
+        }
+
+        public void FormatWordLink(string linkText)
+        {
+            int wordIndex = _richTextBox.Text.IndexOf(linkText);
+
+            if (wordIndex != -1) // Kiểm tra xem linkText có tồn tại không
+            {
+                MessageBox.Show("Running!");
+                _richTextBox.Select(wordIndex, linkText.Length);
+                _richTextBox.SelectionColor = Color.Blue;
+                _richTextBox.SelectionFont = new Font(_richTextBox.Font, FontStyle.Underline);
+                _richTextBox.DeselectAll();
+            }
+            else
+            {
+                MessageBox.Show("The specified link text was not found.", "Link Format Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void OpenDocumentIfLinkClicked(MouseEventArgs e)
+        {
+            if (_richTextBox != null && linkText != null)
+            {
+                int wordIndex = _richTextBox.Text.IndexOf(linkText);
+                int charIndex = _richTextBox.GetCharIndexFromPosition(e.Location);
+
+                if (charIndex >= wordIndex && charIndex < wordIndex + linkText.Length)
+                {
+                    try
+                    {
+                        string fileName = "";
+                        switch (typeOfLink) // sử dụng linkText để xác định loại tài liệu
+                        {
+                            case "Wordpad Document":
+                                fileName = "wordpad";
+                                break;
+                            case "Foxit PhantomPDF Document":
+                                fileName = "FoxitPhantomPDF";
+                                break;
+                            case "Microsoft Word Document":
+                                fileName = "winword";
+                                break;
+                            case "Microsoft Excel":
+                                fileName = "excel";
+                                break;
+                            case "Microsoft PowerPoint Presentation":
+                                fileName = "powerpnt";
+                                break;
+                            default:
+                                MessageBox.Show("Unsupported document type.");
+                                return;
+                        }
+
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = fileName,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cannot open the application: " + ex.Message);
+                    }
+                }
+            }
         }
 
 
@@ -166,7 +327,21 @@ namespace WordPad
             {
                 _richTextBox.Paste();
             }
-            else if (selectedOption == "Wordpad Document" || selectedOption == "Picture (Metafile)")
+            else if (selectedOption == "Wordpad Document")
+            {
+                _richTextBox.SelectedRtf = Clipboard.GetData(DataFormats.Rtf).ToString();
+                typeOfLink = "Microsoft Word Document";
+
+                linkText = Clipboard.GetText();
+                FormatWordLink(linkText);
+
+
+                if (displayAsIcon)
+                {
+
+                }
+            }
+            /*else if (selectedOption == "Wordpad Document" || selectedOption == "Picture (Metafile)")
             {
                 if (displayAsIcon)
                 {
@@ -183,7 +358,7 @@ namespace WordPad
                 {
                     MessageBox.Show("Clipboard does not contain the appropriate data.", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
+            }*/
             else
             {
                 MessageBox.Show("No valid paste option selected.", "Paste Special", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -195,7 +370,6 @@ namespace WordPad
             // Giả lập rằng Paste Link sẽ được cho phép với định dạng HTML hoặc định dạng OEM text
             return Clipboard.ContainsData(DataFormats.Html) || Clipboard.ContainsData(DataFormats.OemText);
         }
-
     }
 }
 

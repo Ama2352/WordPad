@@ -172,5 +172,39 @@ namespace WordPad
             _listBox.Items.Add(now.ToString("HH:mm:ss"));            // 15:08:27 
 
         }
+
+        public void AddObjectTypes(ListBox listBox)
+        {
+            string[] objectTypes = {
+                "Foxit PhantomPDF Document",
+                "Microsoft Word 97-2003 Document",
+                "Microsoft Word Document",
+                "Microsoft Word Macro-Enabled Document",
+                "nFoxit PhantomPDF Document",
+                "OpenDocument Presentation",
+                "OpenDocument Spreadsheet",
+                "OpenDocument Text",
+                "Microsoft Excel 97-2003 Worksheet",
+                "Microsoft Excel Binary Worksheet",
+                "Microsoft Excel Chart",
+                "Microsoft Worksheet",
+                "Microsoft PowerPoint 97-2003 Presentation",
+                "Microsoft PowerPoint 97-2003 Slide",
+                "Microsoft PowerPoint Macro-Enabled Presentation",
+                "Microsoft PowerPoint Macro-Enabled Slide",
+                "Microsoft PowerPoint Presentation",
+                "Microsoft PowerPoint Slide",
+
+                "Math Type 7.0 Equation",
+                "Microsoft Graph Chart",
+                "Organization Chart Add-in for Microsoft",
+                "Package",
+                "Paintbrush Picture"
+            };
+
+            listBox.Items.AddRange(objectTypes);
+        }
+
+
     }
 }

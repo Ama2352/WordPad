@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static WordPad.ParagraphManager;
+using Word = Microsoft.Office.Interop.Word;
+using System.Runtime.InteropServices;
 
 namespace WordPad
 {
@@ -30,7 +33,7 @@ namespace WordPad
             fontFamilyComboBox.DataSource = _fontManager.GetFontFamilies();
 
             // Đặt font mặc định cho richTextBox1
-            richTextBox1.Font = new Font("Calibri", 11);
+            richTextBox1.Font = new System.Drawing.Font("Calibri", 11);
 
             // Đặt font hiển thị mặc định cho fontFamilyComboBox
             fontFamilyComboBox.Text = "Calibri";
@@ -78,9 +81,14 @@ namespace WordPad
             this.KeyPreview = true; // Đặt KeyPreview thành true
             this.KeyDown += new KeyEventHandler(MainForm_KeyDown); // Đăng ký sự kiện KeyDown
 
+            richTextBox1.MouseClick += RichTextBox1_MouseClick;
+
+
+
             // Gọi hàm thiết lập ComboBox cho Bullet Styles
             SetupBulletStyleComboBox();
         }
+
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             // Kiểm tra tổ hợp phím Ctrl + C
@@ -103,11 +111,6 @@ namespace WordPad
             }
         }
 
-        private void btnPasteSpecial_Click(object sender, EventArgs e) // Ví dụ: Button để mở Paste Special
-        {
-            PasteSpecialForm pasteSpecialForm = new PasteSpecialForm(_clipboardManager);
-            pasteSpecialForm.ShowDialog(); // Hiển thị hộp thoại như một modal dialog
-        }
 
         // Clipboard
         private void btnCut_Click(object sender, EventArgs e)
@@ -123,6 +126,17 @@ namespace WordPad
         private void btnPaste_Click(object sender, EventArgs e)
         {
             _clipboardManager.Paste();
+        }
+
+        private void RichTextBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            _clipboardManager.OpenDocumentIfLinkClicked(e);
+        }
+
+        private void btnPasteSpecial_Click(object sender, EventArgs e) // Ví dụ: Button để mở Paste Special
+        {
+            PasteSpecialForm pasteSpecialForm = new PasteSpecialForm(_clipboardManager);
+            pasteSpecialForm.ShowDialog(); // Hiển thị hộp thoại như một modal dialog
         }
 
         // Font
@@ -325,6 +339,17 @@ namespace WordPad
             }    
         }
 
+        private void toolStripButtonInsertObject_Click(object sender, EventArgs e)
+        {
+            using (InsertObjectForm insertObjectForm = new InsertObjectForm(_insertManager, _clipboardManager))
+            {
+                if(insertObjectForm.ShowDialog() == DialogResult.OK)
+                {
+
+                }    
+            }    
+        }
+
 
         // Editing
         private void btnFind_Click(object sender, EventArgs e)
@@ -360,5 +385,46 @@ namespace WordPad
 
         }
 
+        private void OpenAndReadWordDocument(string filePath)
+        {
+            // Khởi tạo ứng dụng Word
+            Word.Application wordApp = new Word.Application();
+            wordApp.Visible = false; // Ẩn ứng dụng Word
+
+            // Mở tài liệu Word
+            Word.Document doc = wordApp.Documents.Open(filePath);
+
+            // Đọc nội dung tài liệu và chuyển vào RichTextBox
+            string textContent = doc.Content.Text;
+            richTextBox1.Text = textContent;
+
+            // Đảm bảo rằng Word sẽ được đóng lại khi xong
+            doc.Close();
+            Marshal.ReleaseComObject(doc);
+            Marshal.ReleaseComObject(wordApp);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*Word.Application wordApp = new Word.Application();
+            Word.Document wordDocument = wordApp.Documents.Open("C:/Users/Admin/Downloads/Script.docx");
+            wordApp.Visible = true; // Hiển thị ứng dụng Word*/
+
+            string filePath = "C:/Users/Admin/Downloads/Script.docx";
+            OpenAndReadWordDocument(filePath);
+        }
+
+        
+
+        private void richTextBox1_MouseClick_1(object sender, MouseEventArgs e)
+        {
+            // Kiểm tra xem người dùng có nhấp vào vị trí hợp lệ hay không
+            string filePath = "C:/Users/Admin/Downloads/Script.docx";  // Đảm bảo bạn có đường dẫn đúng đến tài liệu
+
+            // Mở tài liệu trong ứng dụng Word
+            Word.Application wordApp = new Word.Application();
+            wordApp.Visible = true; // Hiển thị Word
+            wordApp.Documents.Open(filePath); // Mở tài liệu để chỉnh sửa
+        }
     }
 }
