@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnCut = new System.Windows.Forms.Button();
@@ -45,13 +44,9 @@
             this.btnAlignRight = new System.Windows.Forms.Button();
             this.btnInsertImage = new System.Windows.Forms.Button();
             this.btnInsertDateTime = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.txtReplace = new System.Windows.Forms.TextBox();
             this.btnSelectAll = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.btnReplace = new System.Windows.Forms.Button();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.lblReplace = new System.Windows.Forms.Label();
             this.strikethroughButton = new System.Windows.Forms.Button();
             this.subscriptButton = new System.Windows.Forms.Button();
             this.superscriptButton = new System.Windows.Forms.Button();
@@ -72,7 +67,6 @@
             this.toolStripDropDownButtonDateAndTime = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonInsertObject = new System.Windows.Forms.ToolStripButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -86,6 +80,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(432, 238);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseClick_1);
             // 
             // btnCut
@@ -226,23 +221,9 @@
             this.btnInsertDateTime.UseVisualStyleBackColor = true;
             this.btnInsertDateTime.Click += new System.EventHandler(this.btnInsertDateTime_Click);
             // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(91, 230);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(100, 20);
-            this.txtSearch.TabIndex = 17;
-            // 
-            // txtReplace
-            // 
-            this.txtReplace.Location = new System.Drawing.Point(91, 257);
-            this.txtReplace.Name = "txtReplace";
-            this.txtReplace.Size = new System.Drawing.Size(100, 20);
-            this.txtReplace.TabIndex = 18;
-            // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Location = new System.Drawing.Point(116, 341);
+            this.btnSelectAll.Location = new System.Drawing.Point(116, 288);
             this.btnSelectAll.Name = "btnSelectAll";
             this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
             this.btnSelectAll.TabIndex = 19;
@@ -252,7 +233,7 @@
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(116, 283);
+            this.btnFind.Location = new System.Drawing.Point(116, 230);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(75, 23);
             this.btnFind.TabIndex = 20;
@@ -262,31 +243,13 @@
             // 
             // btnReplace
             // 
-            this.btnReplace.Location = new System.Drawing.Point(116, 312);
+            this.btnReplace.Location = new System.Drawing.Point(116, 259);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(75, 23);
             this.btnReplace.TabIndex = 21;
             this.btnReplace.Text = "Replace";
             this.btnReplace.UseVisualStyleBackColor = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(38, 233);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(41, 13);
-            this.lblSearch.TabIndex = 22;
-            this.lblSearch.Text = "Search";
-            // 
-            // lblReplace
-            // 
-            this.lblReplace.AutoSize = true;
-            this.lblReplace.Location = new System.Drawing.Point(38, 260);
-            this.lblReplace.Name = "lblReplace";
-            this.lblReplace.Size = new System.Drawing.Size(47, 13);
-            this.lblReplace.TabIndex = 23;
-            this.lblReplace.Text = "Replace";
             // 
             // strikethroughButton
             // 
@@ -479,11 +442,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(680, 415);
+            this.button1.Location = new System.Drawing.Point(530, 415);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(291, 23);
             this.button1.TabIndex = 34;
-            this.button1.Text = "button1";
+            this.button1.Text = "Thử nghiệm nhúng nội dung app khác vào richtextbox";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -503,13 +466,9 @@
             this.Controls.Add(this.superscriptButton);
             this.Controls.Add(this.subscriptButton);
             this.Controls.Add(this.strikethroughButton);
-            this.Controls.Add(this.lblReplace);
-            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.btnReplace);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btnSelectAll);
-            this.Controls.Add(this.txtReplace);
-            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnInsertDateTime);
             this.Controls.Add(this.btnInsertImage);
             this.Controls.Add(this.btnAlignRight);
@@ -535,7 +494,6 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -556,13 +514,9 @@
         private System.Windows.Forms.Button btnAlignRight;
         private System.Windows.Forms.Button btnInsertImage;
         private System.Windows.Forms.Button btnInsertDateTime;
-        private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.TextBox txtReplace;
         private System.Windows.Forms.Button btnSelectAll;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Button btnReplace;
-        private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.Label lblReplace;
         private System.Windows.Forms.Button strikethroughButton;
         private System.Windows.Forms.Button subscriptButton;
         private System.Windows.Forms.Button superscriptButton;
@@ -583,7 +537,6 @@
         private System.Windows.Forms.ToolStripButton toolStripDropDownButtonDateAndTime;
         private System.Windows.Forms.ToolStripButton toolStripButtonInsertObject;
         private System.Windows.Forms.Button button1;
-        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
     }
 }
 

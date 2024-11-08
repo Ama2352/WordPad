@@ -83,8 +83,6 @@ namespace WordPad
 
             richTextBox1.MouseClick += RichTextBox1_MouseClick;
 
-
-
             // Gọi hàm thiết lập ComboBox cho Bullet Styles
             SetupBulletStyleComboBox();
         }
@@ -354,20 +352,13 @@ namespace WordPad
         // Editing
         private void btnFind_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text;
-            int resultIndex = _editingManager.FindText(searchText);
-
-            if (resultIndex == -1)
-                MessageBox.Show("Text not found.", "Find", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            FindForm findForm = new FindForm(_editingManager);
+            findForm.Show();
         }
-
         private void btnReplace_Click(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text;
-            string replaceText = txtReplace.Text;
-            int replacedCount = _editingManager.ReplaceText(searchText, replaceText);
-
-            MessageBox.Show($"{replacedCount} occurrence(s) replaced.", "Replace", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ReplaceForm replaceForm = new ReplaceForm(_editingManager);
+            replaceForm.Show();
         }
 
         private void btnSelectAll_Click(object sender, EventArgs e)
@@ -404,6 +395,7 @@ namespace WordPad
             Marshal.ReleaseComObject(wordApp);
         }
 
+        // Thử nghiệm nhúng nội dung của app khác vào richtextbox
         private void button1_Click(object sender, EventArgs e)
         {
             /*Word.Application wordApp = new Word.Application();
@@ -415,16 +407,21 @@ namespace WordPad
         }
 
         
-
+        // Thử nghiệm gắn Link vô text trong richtextbox
         private void richTextBox1_MouseClick_1(object sender, MouseEventArgs e)
         {
-            // Kiểm tra xem người dùng có nhấp vào vị trí hợp lệ hay không
+            /*// Kiểm tra xem người dùng có nhấp vào vị trí hợp lệ hay không
             string filePath = "C:/Users/Admin/Downloads/Script.docx";  // Đảm bảo bạn có đường dẫn đúng đến tài liệu
 
             // Mở tài liệu trong ứng dụng Word
             Word.Application wordApp = new Word.Application();
             wordApp.Visible = true; // Hiển thị Word
-            wordApp.Documents.Open(filePath); // Mở tài liệu để chỉnh sửa
+            wordApp.Documents.Open(filePath); // Mở tài liệu để chỉnh sửa*/
+        }
+
+        private void richTextBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
