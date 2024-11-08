@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordPad", "WordPad\WordPad.csproj", "{BCE4B234-82AF-49E9-8BF0-E0CBD9EE0A47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingFIeld", "TestingFIeld\TestingFIeld.csproj", "{1E24A7E3-030C-4011-AD42-A9824B4B1055}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BCE4B234-82AF-49E9-8BF0-E0CBD9EE0A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCE4B234-82AF-49E9-8BF0-E0CBD9EE0A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCE4B234-82AF-49E9-8BF0-E0CBD9EE0A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E24A7E3-030C-4011-AD42-A9824B4B1055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E24A7E3-030C-4011-AD42-A9824B4B1055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E24A7E3-030C-4011-AD42-A9824B4B1055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E24A7E3-030C-4011-AD42-A9824B4B1055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
