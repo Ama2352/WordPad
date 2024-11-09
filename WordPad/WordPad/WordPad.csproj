@@ -143,8 +143,6 @@
     <Compile Include="NewManager.cs" />
     <Compile Include="OpenManager.cs" />
     <Compile Include="PrintManager.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveManager.cs" />
     <Compile Include="SendEmailManager.cs" />
     <Compile Include="TextBoxBehaviorManager.cs" />

@@ -28,6 +28,8 @@ namespace WordPad
         private static extern int GetScrollPos(IntPtr hWnd, int nBar);
         private const int SB_VERT = 1; // Vertical scrollbar
         FileManager fileManager;
+
+        // Tạo cacbiến quản lý
         private ClipboardManager _clipboardManager;
         private FontManager _fontManager;
         private ParagraphManager _paragraphManager;
@@ -39,67 +41,29 @@ namespace WordPad
 
         }
 
-        private void SettingFontType(FontManager _fontManager)
-        {
-            // Gán danh sách font cho fontFamilyComboBox
-            fontFamilyComboBox.DataSource = _fontManager.GetFontFamilies();
-
-            // Đặt font mặc định cho richTextBox1
-            richTextBox1.Font = new System.Drawing.Font("Calibri", 11);
-
-            // Đặt font hiển thị mặc định cho fontFamilyComboBox
-            fontFamilyComboBox.Text = "Calibri";
-        }
-
-        private void SettingFontSize(FontManager _fontManager)
-        {
-            // Thiết lập kích thước font
-            fontSizeComboBox.Items.AddRange(new object[]
-            { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72});
-
-            // Đặt kích thước font mặc định trong fontSizeComboBox
-            fontSizeComboBox.SelectedItem = "11";
-
-            // Đặt kích thước font hiển thị mặc định cho fontFamilyComboBox
-            fontSizeComboBox.Text = "11";
-
-            // Đăng ký sự kiện FontSizeChanged
-            _fontManager.FontSizeChanged += OnFontSizeChanged;
-        }
-
-        // Hàm để thiết lập ComboBox Bullet Styles
-        private void SetupBulletStyleComboBox()
-        {
-            // Thêm các kiểu đầu dòng vào ComboBox
-            toolStripCombBulletStyles.Items.AddRange(Enum.GetNames(typeof(BulletStyle)));
-
-            // Gắn sự kiện SelectedIndexChanged cho ComboBox
-            toolStripCombBulletStyles.SelectedIndexChanged += toolStripCombBulletStyles_SelectedIndexChanged;
-        }
-
         public MainForm()
         {
             InitializeComponent();
             this.Load += Form1_Load;
 
+            // Khởi tạo các biến quản lý 
             _clipboardManager = new ClipboardManager(richTextBox1); 
             _fontManager = new FontManager(richTextBox1);
             _paragraphManager = new ParagraphManager(richTextBox1);
             _insertManager = new InsertManager(richTextBox1);
             _editingManager = new EditingManager(richTextBox1);
 
+            // Cài đặt kiểu chữ và kích cỡ mặc định
             SettingFontType(_fontManager);
             SettingFontSize(_fontManager);
 
-            this.KeyPreview = true; // Đặt KeyPreview thành true
-            this.KeyDown += new KeyEventHandler(MainForm_KeyDown); // Đăng ký sự kiện KeyDown
+            // Đăng ký sự kiện dùng phím tắt (Cài đặt các phím tắt để dùng chức năng)
+            this.KeyDown += new KeyEventHandler(MainForm_KeyDown); 
 
             richTextBox1.MouseClick += RichTextBox1_MouseClick;
-
-            // Gọi hàm thiết lập ComboBox cho Bullet Styles
-            SetupBulletStyleComboBox();
         }
 
+        #region KeyDown_Event
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             // Kiểm tra tổ hợp phím Ctrl + C
@@ -121,9 +85,10 @@ namespace WordPad
                 e.SuppressKeyPress = true;
             }
         }
+        #endregion
 
 
-        // Clipboard
+        #region Clipboard
         private void btnCut_Click(object sender, EventArgs e)
         {
             _clipboardManager.Cut();
@@ -149,8 +114,10 @@ namespace WordPad
             PasteSpecialForm pasteSpecialForm = new PasteSpecialForm(_clipboardManager);
             pasteSpecialForm.ShowDialog(); // Hiển thị hộp thoại như một modal dialog
         }
+        #endregion
 
-        // Font
+        #region Font
+        // Các hàm thao tác toolBox
         private void btnBold_Click(object sender, EventArgs e)
         {
             _fontManager.ToggleBold();
@@ -164,25 +131,6 @@ namespace WordPad
         private void btnUnderline_Click(object sender, EventArgs e)
         {
             _fontManager.ToggleUnderline();
-        }
-
-        private void fontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _fontManager.ChangeFontFamily(fontFamilyComboBox.SelectedItem.ToString());
-        }
-
-        private void fontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (float.TryParse(fontSizeComboBox.SelectedItem.ToString(), out float fontSize))
-            {
-                _fontManager.ChangeFontSize(fontSize);
-            }
-        }
-
-        // Cập nhật kích cỡ font đang hiển thị nếu có thay đổi về kích thước
-        private void OnFontSizeChanged(float newSize)
-        {  
-            fontSizeComboBox.Text = newSize.ToString();
         }
 
         private void btnColorPicker_Click(object sender, EventArgs e)
@@ -233,8 +181,64 @@ namespace WordPad
             _fontManager.ShrinkFont();
         }
 
+        // Các hàm Event
+        private void fontFamilyComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _fontManager.ChangeFontFamily(fontFamilyComboBox.SelectedItem.ToString());
+        }
 
-        // Paragraph
+        private void fontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (float.TryParse(fontSizeComboBox.SelectedItem.ToString(), out float fontSize))
+            {
+                _fontManager.ChangeFontSize(fontSize);
+            }
+        }
+
+        private void OnFontSizeChanged(float newSize) 
+        {
+            // Cập nhật kích cỡ font đang hiển thị nếu có thay đổi về kích thước
+            fontSizeComboBox.Text = newSize.ToString();
+        }
+
+        // Các hàm cài đặt chức năng
+        private void SettingFontType(FontManager _fontManager)
+        {
+            // Gán danh sách font cho fontFamilyComboBox
+            fontFamilyComboBox.DataSource = _fontManager.GetFontFamilies();
+
+            // Đặt font mặc định cho richTextBox1
+            richTextBox1.Font = new System.Drawing.Font("Calibri", 11);
+
+            // Đặt font hiển thị mặc định cho fontFamilyComboBox
+            fontFamilyComboBox.Text = "Calibri";
+        }
+
+        private void SettingFontSize(FontManager _fontManager)
+        {
+            // Thiết lập kích thước font
+            fontSizeComboBox.Items.AddRange(new object[]
+            { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72});
+
+            // Đặt kích thước font mặc định trong fontSizeComboBox
+            fontSizeComboBox.SelectedItem = "11";
+
+            // Đặt kích thước font hiển thị mặc định cho fontFamilyComboBox
+            fontSizeComboBox.Text = "11";
+
+            // Đăng ký sự kiện FontSizeChanged
+            _fontManager.FontSizeChanged += OnFontSizeChanged;
+        }
+
+        
+
+        
+
+       
+        #endregion
+
+
+        #region Paragraph
         private void btnAlignLeft_Click(object sender, EventArgs e)
         {
             _paragraphManager.AlignLeft();
@@ -264,8 +268,9 @@ namespace WordPad
         {
             
         }
+        #endregion
 
-        // Insert
+        #region Insert
         private void btnInsertImage_Click(object sender, EventArgs e)
         {
             _insertManager.InsertImage();
@@ -360,9 +365,10 @@ namespace WordPad
                 }    
             }    
         }
+        #endregion
 
 
-        // Editing
+        #region Editing
         private void btnFind_Click(object sender, EventArgs e)
         {
             FindForm findForm = new FindForm(_editingManager);
@@ -388,7 +394,9 @@ namespace WordPad
         {
 
         }
+        #endregion
 
+        #region TestFunctions
         private void OpenAndReadWordDocument(string filePath)
         {
             // Khởi tạo ứng dụng Word
@@ -431,6 +439,12 @@ namespace WordPad
             wordApp.Visible = true; // Hiển thị Word
             wordApp.Documents.Open(filePath); // Mở tài liệu để chỉnh sửa*/
         }
+        #endregion
+
+
+
+
+
 
         private void richTextBox1_Click(object sender, EventArgs e)
         {
@@ -448,9 +462,9 @@ namespace WordPad
         private void Form1_Load(object sender, EventArgs e)
         {
             fileManager = new FileManager(richTextBox1, panel1, this);
-            fileManager.CenterTextBox();
+           /* fileManager.CenterTextBox();
             fileManager.AdjustRichTextBoxToPageSetup();
-            fileManager.ApllyMargin();
+            fileManager.ApllyMargin();*/
         }
         private void Form1_Resize(object sender, EventArgs e)
         {

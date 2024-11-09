@@ -187,6 +187,8 @@ namespace WordPad
                 "Microsoft Excel 97-2003 Worksheet",
                 "Microsoft Excel Binary Worksheet",
                 "Microsoft Excel Chart",
+                "Microsoft Excel Macro-Enabled Worksheet",
+                "Microsoft Excel Worksheet",
                 "Microsoft Worksheet",
                 "Microsoft PowerPoint 97-2003 Presentation",
                 "Microsoft PowerPoint 97-2003 Slide",
@@ -194,7 +196,7 @@ namespace WordPad
                 "Microsoft PowerPoint Macro-Enabled Slide",
                 "Microsoft PowerPoint Presentation",
                 "Microsoft PowerPoint Slide",
-
+                "Wordpad Document",
                 "Math Type 7.0 Equation",
                 "Microsoft Graph Chart",
                 "Organization Chart Add-in for Microsoft",

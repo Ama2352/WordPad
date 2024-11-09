@@ -145,95 +145,103 @@ namespace WordPad
                             LoadImage(imagePath));
                 case "Foxit PhantomPDF Document":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Foxit PhantomPDF Document", LoadImage(imagePath));
+                    return ("Inserts a new Foxit PhantomPDF Document object into your document. It will be displayed as an icon.", LoadImage(imagePath));
 
                 case "Microsoft Word 97-2003 Document":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Word 97-2003 Document", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Excel 97-2003 Worksheet object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Word Document":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Word Document", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Word Document object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Word Macro-Enabled Document":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Word Macro-Enabled Document", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Word Macro-Enabled Document object into your document.", LoadImage(imagePath));
 
                 case "nFoxit PhantomPDF Document":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho nFoxit PhantomPDF Document", LoadImage(imagePath));
+                    return ("Inserts a new nFoxit PhantomPDF Document object into your document.", LoadImage(imagePath));
 
                 case "OpenDocument Presentation":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho OpenDocument Presentation", LoadImage(imagePath));
+                    return ("Inserts a new OpenDocument Presentation object into your document.", LoadImage(imagePath));
 
                 case "OpenDocument Spreadsheet":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho OpenDocument Spreadsheet", LoadImage(imagePath));
+                    return ("Inserts a new OpenDocument Spreadsheet object into your document.", LoadImage(imagePath));
 
                 case "OpenDocument Text":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho OpenDocument Text", LoadImage(imagePath));
+                    return ("Inserts a new OpenDocument Text object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Excel 97-2003 Worksheet":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Excel 97-2003 Worksheet", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Excel 97-2003 Worksheet object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Excel Binary Worksheet":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Excel Binary Worksheet", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Excel Binary Worksheet object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Excel Chart":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Excel Chart", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Excel Chart object into your document.", LoadImage(imagePath));
+
+                case "Microsoft Excel Macro-Enabled Worksheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Inserts a new Microsoft Excel Macro-Enabled Worksheet object into your document.", LoadImage(imagePath));
+
+                case "Microsoft Excel Worksheet":
+                    imagePath = Path.Combine(_imageDirectory, "paste.png");
+                    return ("Inserts a new Microsoft Excel Worksheet object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Worksheet":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Worksheet", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Worksheet object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint 97-2003 Presentation":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint 97-2003 Presentation", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint 97-2003 Presentation object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint 97-2003 Slide":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint 97-2003 Slide", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint 97-2003 Slide object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint Macro-Enabled Presentation":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint Macro-Enabled Presentation", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint Macro-Enabled Presentation object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint Macro-Enabled Slide":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint Macro-Enabled Slide", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint Macro-Enabled Slide object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint Presentation":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint Presentation", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint Presentation object into your document.", LoadImage(imagePath));
 
                 case "Microsoft PowerPoint Slide":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft PowerPoint Slide", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft PowerPoint Slide object into your document.", LoadImage(imagePath));
 
                 case "Math Type 7.0 Equation":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Math Type 7.0 Equation", LoadImage(imagePath));
+                    return ("Inserts a new Math Type 7.0 Equation object into your document.", LoadImage(imagePath));
 
                 case "Microsoft Graph Chart":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Microsoft Graph Chart", LoadImage(imagePath));
+                    return ("Inserts a new Microsoft Graph Chart object into your document.", LoadImage(imagePath));
 
                 case "Organization Chart Add-in for Microsoft":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Organization Chart Add-in for Microsoft", LoadImage(imagePath));
+                    return ("Inserts a new Organization Chart Add-in for Microsoft object into your document.", LoadImage(imagePath));
 
                 case "Package":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Package", LoadImage(imagePath));
+                    return ("Inserts a new Package object into your document.", LoadImage(imagePath));
 
                 case "Paintbrush Picture":
                     imagePath = Path.Combine(_imageDirectory, "paste.png");
-                    return ("Mô tả cho Paintbrush Picture", LoadImage(imagePath));
+                    return ("Inserts a new Paintbrush Picture object into your document.", LoadImage(imagePath));
 
                 default:
                     return ("No description for this option.", null);
